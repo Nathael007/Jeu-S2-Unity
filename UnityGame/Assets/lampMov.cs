@@ -1,31 +1,32 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class lampMov : MonoBehaviour
 {
-    private float xStart, yStart, zStart;
-    private float xStop, yStop, zStop;
-    private float smoothTime = 0.5f;
-    public float speed = 10;
+    [SerializeField]
+    private float speed = 3f;
+    [SerializeField]
+    private Vector3 vecteur;
+    [SerializeField]
+    int minRandom = 1, maxRandom = 5;
 
-    public Vector3 targetPosition;
-    public Vector3 startPosition;
-
-    Vector3 velocity;
-
-    // Start is called before the first frame update
+    int timer;
+    Vector3 debut;
     void Start()
     {
-        startPosition = new Vector3(xStart, yStart, zStart);
-        targetPosition = new Vector3 (xStop, yStop, zStop);
+        debut = transform.position;
+        timer = UnityEngine.Random.Range(minRandom, maxRandom);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.SmoothDamp(startPosition, targetPosition, ref velocity, smoothTime, speed);
-
-        if ()
+        transform.position += new Vector3(vecteur.x * Time.deltaTime * speed, vecteur.y * Time.deltaTime * speed, vecteur.z * Time.deltaTime * speed);
+        if (Time.fixedTime%timer == 0)
+        {
+            transform.position = debut;
+            timer = UnityEngine.Random.Range(minRandom,maxRandom);
+        }
     }
 }
