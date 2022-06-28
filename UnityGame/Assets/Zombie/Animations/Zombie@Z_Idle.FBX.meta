@@ -1,14 +1,14 @@
 fileFormatVersion: 2
 guid: 0d6373858f853604b960cf84b7d3dfbf
 ModelImporter:
-  serializedVersion: 26
+  serializedVersion: 19300
   internalIDToNameTable:
   - first:
       74: -6257440219318784398
     second: Z_Idle
   externalObjects: {}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -21,10 +21,10 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: "\nClip 'ZombieFree@animation' has import animation warnings
-      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
-      to improve retargeting quality.\n\t'Base HumanRibcage' is inbetween humanoid
-      transforms and has rotation animation that will be discarded.\n"
+    animationImportWarnings: "\nClip 'ZombieFree@animation' has import animation
+      warnings that might lower retargeting quality:\nNote: Activate translation
+      DOF on avatar to improve retargeting quality.\n\t'Base HumanRibcage' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -42,7 +42,7 @@ ModelImporter:
       takeName: ZombieFree@animation
       internalID: 0
       firstFrame: 0
-      lastFrame: 80
+      lastFrame: 2
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -104,7 +104,6 @@ ModelImporter:
     normalSmoothingSource: 0
   referencedClips: []
   importAnimation: 1
-  copyAvatar: 1
   humanDescription:
     serializedVersion: 3
     human:
@@ -889,8 +888,10 @@ ModelImporter:
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 8f7380da49034cd488ddff94b1ac35d1,
     type: 3}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
+  avatarSetup: 2
   additionalBone: 0
   userData: 
   assetBundleName: 
