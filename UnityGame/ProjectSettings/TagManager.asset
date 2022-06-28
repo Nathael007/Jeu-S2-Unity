@@ -5,8 +5,18 @@ TagManager:
   serializedVersion: 2
   tags:
   - Fire
-  - salle1
-  - salle2
+  - Room1
+  - Room2
+  - Room3
+  - HallWay1
+  - TPSplayer
+  - FPSplayer
+  - Room4
+  - Room5
+  - Room6
+  - Room7
+  - Room8
+  - Room9
   layers:
   - Default
   - TransparentFX
