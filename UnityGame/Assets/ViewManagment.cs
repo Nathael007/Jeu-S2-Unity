@@ -8,7 +8,7 @@ public class ViewManagment : MonoBehaviour
 {
     //instanciation des controleurs et des scripts de triggers
     public ThirdPersonCharacter TPSplayer;
-    public FirstPersonController FPSplayer;
+    public RigidbodyFirstPersonController FPSplayer;
     public TriggerTPS triggerTPS;
     public TriggerFPS triggerFPS;
     //instanciation de la liste de tous les éléments du jeu !
@@ -20,6 +20,10 @@ public class ViewManagment : MonoBehaviour
     private Transform target;
     //true = TPSView false = FPSView
     private bool isTPS;
+    //offset transition FPT-TPS
+    private Vector3 offsetTransition = new Vector3(0, 0, 3);
+    private Vector3 offsetTransitionFPS = new Vector3(0, 2, 0);
+    private Vector3 offsetTransitionTPS = new Vector3(0, 6, 0);
     // Start is called before the first frame update
     void Start()
     {
@@ -61,9 +65,9 @@ public class ViewManagment : MonoBehaviour
                     reachTarget(target.position + offset);
                 }
             }
-            if (triggerTPS.tagEnter == "Room7" || triggerFPS.tagEnter == "Room7")
+            if (triggerTPS.tagEnter == "Room7")
             {
-                if (triggerTPS.tagExit == "Room1" || triggerFPS.tagExit == "HallWay1" || triggerTPS.tagStay == "Room7")
+                if (triggerTPS.tagExit == "Room1" || triggerTPS.tagStay == "Room7")
                 {
                     target = elements.Find(x => x.name == "Floor71").transform;
                     reachTarget(target.position + offset);
@@ -83,6 +87,97 @@ public class ViewManagment : MonoBehaviour
                 {
                     target = elements.Find(x => x.name == "Floor34").transform;
                     reachTarget(target.position + offset);
+                }
+            }
+            if (triggerTPS.tagEnter == "HallWay1")
+            {
+                if (triggerTPS.tagExit == "Room7")
+                {
+                    //FPSplayer.transform.SetPositionAndRotation((TPSplayer.transform.position - offsetTransition + offsetTransitionFPS), TPSplayer.transform.rotation);
+                    FPSplayer.transform.SetPositionAndRotation(new Vector3(TPSplayer.transform.position.x, TPSplayer.transform.position.y + 2, TPSplayer.transform.position.z + 2), TPSplayer.transform.rotation);
+                    TPSplayer.gameObject.SetActive(false);
+                    FPSplayer.gameObject.SetActive(true);
+                    TPSplayer.transform.position = new Vector3(1000, 1000, 1000);
+                    Debug.Log("passe Ici");
+                    //Camera.main.gameObject.SetActive(false);
+                    isTPS = false;
+                }
+            }
+            if (triggerTPS.tagEnter == "Room4")
+            {
+                if (triggerTPS.tagExit == "HallWay1")
+                {
+                    target = elements.Find(x => x.name == "Floor44").transform;
+                    Camera.main.transform.position = target.position + offset;
+                }
+                if (triggerTPS.tagExit == "Room8" || triggerTPS.tagStay == "Room4")
+                {
+                    target = elements.Find(x => x.name == "Floor44").transform;
+                    reachTarget(target.position + offset);
+                }
+            }
+            if (triggerTPS.tagEnter == "Room8")
+            {
+                if (triggerTPS.tagExit == "Room4" || triggerTPS.tagExit == "Room5" || triggerTPS.tagStay == "Room8")
+                {
+                    target = elements.Find(x => x.name == "Floor81").transform;
+                    reachTarget(target.position + offset);
+                }
+            }
+            if (triggerTPS.tagEnter == "Room5")
+            {
+                if (triggerTPS.tagExit == "Room8" || triggerTPS.tagExit == "Room6" || triggerTPS.tagExit == "Room9" || triggerTPS.tagStay == "Room5" )
+                {
+                    target = elements.Find(x => x.name == "Floor55").transform;
+                    reachTarget(target.position + offset);
+                }
+            }
+            if (triggerTPS.tagEnter == "Room6")
+            {
+                if (triggerTPS.tagExit == "Room5" || triggerTPS.tagExit == "Room9" || triggerTPS.tagStay == "Room6")
+                {
+                    target = elements.Find(x => x.name == "Floor64").transform;
+                    reachTarget(target.position + offset);
+                }
+            }
+            if (triggerTPS.tagEnter == "Room9")
+            {
+                if (triggerTPS.tagExit == "Room6" || triggerTPS.tagExit == "Room5" || triggerTPS.tagStay == "Room9")
+                {
+                    target = elements.Find(x => x.name == "Floor91").transform;
+                    reachTarget(target.position + offset);
+                }
+            }
+
+        }
+        if (!isTPS)
+        {
+            if (triggerFPS.tagEnter == "Room7")
+            {
+                if (triggerFPS.tagExit == "HallWay1")
+                {
+                    //TPSplayer.transform.SetPositionAndRotation((FPSplayer.transform.position + offsetTransition + offsetTransitionTPS), FPSplayer.transform.rotation);
+                    TPSplayer.transform.SetPositionAndRotation(new Vector3(FPSplayer.transform.position.x, FPSplayer.transform.position.y, FPSplayer.transform.position.z), FPSplayer.transform.rotation); FPSplayer.gameObject.SetActive(false);
+                    TPSplayer.gameObject.SetActive(true);
+                    FPSplayer.gameObject.SetActive(false);
+                    //FPSplayer.transform.position = new Vector3(1000, 1000, 1000);
+                    //Camera.main.gameObject.SetActive(true);
+                    Debug.Log("HallWay1 => Room7");
+                    isTPS = true;
+                }
+            }
+            if (triggerFPS.tagEnter == "Room4")
+            {
+                if (triggerFPS.tagExit == "HallWay1")
+                {
+                    TPSplayer.transform.SetPositionAndRotation(new Vector3(FPSplayer.transform.position.x, FPSplayer.transform.position.y, FPSplayer.transform.position.z), FPSplayer.transform.rotation); FPSplayer.gameObject.SetActive(false);
+                    TPSplayer.gameObject.SetActive(true);
+                    FPSplayer.gameObject.SetActive(false);
+                    //FPSplayer.transform.position = new Vector3(1000, 1000, 1000);
+                    //Camera.main.gameObject.SetActive(true);
+                    isTPS = true;
+                    target = elements.Find(x => x.name == "Floor44").transform;
+                    Camera.main.transform.position = target.position + offset;
                 }
             }
         }

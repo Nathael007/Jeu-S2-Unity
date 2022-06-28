@@ -17,6 +17,7 @@ TagManager:
   - Room7
   - Room8
   - Room9
+  - FPScam
   layers:
   - Default
   - TransparentFX
